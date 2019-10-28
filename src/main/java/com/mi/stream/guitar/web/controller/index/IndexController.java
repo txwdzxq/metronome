@@ -19,6 +19,7 @@ public class IndexController extends BaseController {
     @GetMapping(value = "hello")
     @ResponseBody
     public String hello() {
+        
         return "hello";
     }
     
