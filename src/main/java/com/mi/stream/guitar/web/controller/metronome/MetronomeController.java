@@ -5,6 +5,7 @@ import com.mi.stream.guitar.web.service.metronome.MetronomeService;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  * Metronome
@@ -22,5 +23,9 @@ public class MetronomeController extends BaseController {
         super(request, response);
     }
     
+    @GetMapping
+    public  String metronome() {
+        return "index/index";
+    }
     
 }
