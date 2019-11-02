@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Metronome
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @date 2019/10/28 10:22
  */
 @Controller
+@RequestMapping(value = {"metronome"})
 public class MetronomeController extends BaseController {
     
     @Resource(name = "metronomeService")
@@ -23,9 +25,9 @@ public class MetronomeController extends BaseController {
         super(request, response);
     }
     
-    @GetMapping
-    public  String metronome() {
-        return "index/index";
+    @GetMapping(value = {"/"})
+    public String metronome() {
+        return "metronome/metronome";
     }
     
 }

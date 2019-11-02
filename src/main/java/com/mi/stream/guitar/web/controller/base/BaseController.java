@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
  */
 public abstract class BaseController<T> {
     
-    HttpServletRequest request;
-    HttpServletRequest response;
+    protected HttpServletRequest request;
+    protected HttpServletRequest response;
     
     public BaseController(HttpServletRequest request, HttpServletRequest response) {
         this.request = request;
