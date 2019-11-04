@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @date 2019/10/28 10:22
  */
 @Controller
-@RequestMapping(value = {"metronome"})
+@RequestMapping(value = "/metronome")
 public class MetronomeController extends BaseController {
     
     @Resource(name = "metronomeService")
@@ -25,7 +25,7 @@ public class MetronomeController extends BaseController {
         super(request, response);
     }
     
-    @GetMapping(value = {"/"})
+    @GetMapping(value = "/")
     public String metronome() {
         return "metronome/metronome";
     }
