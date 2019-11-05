@@ -53,7 +53,7 @@ elements.beatType.addEventListener('input', update);
 elements.tempo.addEventListener('input', updateTempoValue);
 elements.tempo.addEventListener('change', update);
 
-elements.closeOptions.addEventListener('click', (e) => {
+elements.closeOptions.addEventListener('click', () => {
     elements.options.classList.toggle('hidden');
 });
 
@@ -97,8 +97,8 @@ function update(shouldPlaySound) {
     if (shouldPlaySound) {
         // Tick once before starting the interval, to make the metronome
         // start immediately when pressing play.
+        updateBeepInterval(elements.tempo.value, elements.beatType.value);
         tick();
-        return updateBeepInterval(elements.tempo.value, elements.beatType.value);
     }
 
     settings.timesThrough = -1;
@@ -117,11 +117,11 @@ function updateTapTempo() {
     updateTempoValue();
 }
 
-
+let interval = 0;
 function updateBeepInterval(tempo, beatType) {
 
     if (tempo > 0) {
-        const interval = parseInt(bpmToMs(tempo, beatType));
+        interval = parseInt(bpmToMs(tempo, beatType));
         beepInterval = setInterval(tick, interval);
     }
 }
@@ -171,27 +171,42 @@ function tick() {
         gain.gain.exponentialRampToValueAtTime(0.00001, context.currentTime + .10)
     }
 
-    horse_race_lamp();
+    horse_race_lamp_2();
 }
 
-function horse_race_lamp() {
+function horse_race_lamp_1() {
     let len = elements.beats.length;
     for (let i = 0; i < len; i++) {
         let element = elements.beats.item(i);
         let background = element.style.background;
         if (background !== "rgb(86, 86, 86)") {
             element.style.background = "rgb(86, 86, 86)";
-            return;
         }
     }
     for (let i = 1; i < len; i++) {
-        elements.beats.item(i).style.background="rgb(255, 255, 255)";
+        elements.beats.item(i).style.background = "rgb(255, 255, 255)";
     }
+}
+
+let lamp = 0;
+function horse_race_lamp_2() {
+    if (lamp === elements.beats.length) {
+        lamp = 0;
+    }
+    elements.beats.item(lamp).style.background = "rgb(86, 86, 86)";
+    let i = lamp;
+    console.log(interval);
+
+    setTimeout(function () {
+        elements.beats.item(i).style.background = "rgb(255, 255, 255)";
+    }, interval/3);
+    lamp++;
 }
 
 function clear_horse_race_lamp() {
     let len = elements.beats.length;
     for (let i = 0; i < len; i++) {
-        elements.beats.item(i).style.background="rgb(255, 255, 255)";
+        elements.beats.item(i).style.background = "rgb(255, 255, 255)";
     }
+    lamp = 0;
 }
