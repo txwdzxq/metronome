@@ -28,6 +28,8 @@ const elements = {
     waveform: document.getElementById("waveform"),
     tapButton: document.getElementById("tap-button"),
 
+    beatFrame: document.getElementById("beat-frame"),
+
     beats: document.getElementsByClassName("beat")
 };
 
@@ -59,6 +61,8 @@ elements.closeOptions.addEventListener('click', () => {
 
 elements.tapButton.addEventListener('click', updateTapTempo);
 
+elements.noteType.addEventListener('click', updateNoteType);
+
 function updateTempoValue() {
     elements.tempoValue.innerText = `at ${elements.tempo.value} bpm`;
 }
@@ -71,6 +75,35 @@ function togglePlay() {
 function updateBeatCounter() {
     const val = elements.noteType.value;
     elements.beatCounter.innerText = `${(settings.timesThrough % val) + 1}`;
+}
+
+function updateNoteType() {
+    let beatCount = elements.noteType.value;
+    console.log(beatCount);
+    elements.beatFrame.innerHTML = "";
+    if (beatCount < 9) {
+        for (let i = 0; i < beatCount; i++) {
+            elements.beatFrame.insertAdjacentElement("beforeend", createDiv());
+        }
+    }
+    lamp = 0;
+    clear_horse_race_lamp();
+}
+
+function createDiv() {
+    let tempDiv = document.createElement('div');
+    tempDiv.className = "beat";
+
+    tempDiv.insertAdjacentElement("beforeend", createDivChild());
+    tempDiv.insertAdjacentElement("beforeend", createDivChild());
+    tempDiv.insertAdjacentElement("beforeend", createDivChild());
+    return tempDiv;
+}
+
+function createDivChild() {
+    let tempDiv = document.createElement('div');
+    tempDiv.className = "beat-type";
+    return tempDiv;
 }
 
 /**
@@ -118,6 +151,7 @@ function updateTapTempo() {
 }
 
 let interval = 0;
+
 function updateBeepInterval(tempo, beatType) {
 
     if (tempo > 0) {
@@ -179,8 +213,8 @@ function horse_race_lamp_1() {
     for (let i = 0; i < len; i++) {
         let element = elements.beats.item(i);
         let background = element.style.background;
-        if (background !== "rgb(86, 86, 86)") {
-            element.style.background = "rgb(86, 86, 86)";
+        if (background !== "rgb(160, 160, 160)") {
+            element.style.background = "rgb(160, 160, 160)";
         }
     }
     for (let i = 1; i < len; i++) {
@@ -189,17 +223,16 @@ function horse_race_lamp_1() {
 }
 
 let lamp = 0;
+
 function horse_race_lamp_2() {
     if (lamp === elements.beats.length) {
         lamp = 0;
     }
-    elements.beats.item(lamp).style.background = "rgb(86, 86, 86)";
+    elements.beats.item(lamp).style.background = "rgb(160, 160, 160)";
     let i = lamp;
-    console.log(interval);
-
-    setTimeout(function () {
+    setTimeout(() => {
         elements.beats.item(i).style.background = "rgb(255, 255, 255)";
-    }, interval/3);
+    }, interval / 3);
     lamp++;
 }
 
