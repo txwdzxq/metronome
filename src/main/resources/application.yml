@@ -1,0 +1,29 @@
+server:
+  port: 8080
+
+spring:
+  #thymelea configure
+  #  thymeleaf:
+  #    prefix: classpath:/templates/
+  #    suffix: .html
+  #    mode: HTML5
+  #    encoding: UTF-8
+  #    #Hot deployment file, page does not generate cache, timely update
+  #    cache: false
+  freemarker:
+    template-loader-path: classpath:/templates/
+    cache: false
+    content-type: text/html
+    charset: UTF-8
+    check-template-location: true
+    suffix: .ftl
+
+  resources:
+    chain:
+      strategy:
+        content:
+          enabled: true
+          paths: /**
+    static-locations: classpath:/static
+  mvc:
+    static-path-pattern: /static/**
