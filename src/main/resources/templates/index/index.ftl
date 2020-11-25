@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
-    <title>Index Beat</title>
+    <title>Index Metronome</title>
     <link rel="stylesheet" href="/static/css/index/index.css">
     <script src="/static/js/common/jquery/jquery-3.5.1.min.js"></script>
     <script src="/static/js/index/index.js"></script>
