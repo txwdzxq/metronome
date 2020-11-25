@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class IndexController extends BaseController<String> {
     
-    
     @GetMapping(value = {"/", "index"})
     public String index(Model model) {
         model.addAttribute("test", "testing");
