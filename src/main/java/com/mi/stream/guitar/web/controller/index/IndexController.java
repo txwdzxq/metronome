@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
+ * index controller
+ *
  * @author mi zxq
  * @date 2019/10/28 9:56
  */
