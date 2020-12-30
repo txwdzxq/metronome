@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
+ * error controller
+ *
  * @author mi zxq
  * @date 2019/9/15 8:59
  */
