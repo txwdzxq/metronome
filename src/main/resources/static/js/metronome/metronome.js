@@ -139,7 +139,7 @@ function update(shouldPlaySound) {
         tick();
     }
 
-    settings.timesThrough = -1;
+    settings.timesThrough = 0;
 }
 
 let lastTap;
