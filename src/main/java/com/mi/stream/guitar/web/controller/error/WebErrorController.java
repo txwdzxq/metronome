@@ -1,25 +1,23 @@
 package com.mi.stream.guitar.web.controller.error;
 
 import com.mi.stream.guitar.web.controller.base.BaseController;
-import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
+ * error controller
+ *
  * @author mi zxq
  * @date 2019/9/15 8:59
  */
 @Controller
-public class WebErrorController extends BaseController implements org.springframework.boot.web.servlet.error.ErrorController {
-    private static final Logger LOG = LoggerFactory.getLogger(WebErrorController.class);
-    
-    public WebErrorController(HttpServletRequest request, HttpServletRequest response) {
-        super(request, response);
-    }
+public class WebErrorController extends BaseController<String> implements ErrorController {
+    private static final Logger logger = LoggerFactory.getLogger(WebErrorController.class);
     
     @GetMapping(value = "/error")
     @ResponseBody
@@ -43,10 +41,10 @@ public class WebErrorController extends BaseController implements org.springfram
                 case INTERNAL_SERVER_ERROR:
                     return httpStatus;
                 default:
-                    return "unknown status code";
+                    return "unknown status code" + httpStatus;
             }
         } catch (IllegalArgumentException e) {
-            LOG.error(e.getClass().getName() + "=", e);
+            logger.error(e.getClass().getName() + "=", e);
         }
         return HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase();
     }

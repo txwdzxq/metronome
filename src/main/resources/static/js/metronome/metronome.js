@@ -1,3 +1,36 @@
+let elements;
+window.onload = function () {
+    elements = {
+        noteType: document.getElementById("note-type"),
+        beatType: document.getElementById("beat-type"),
+        tempo: document.getElementById("tempo"),
+        tempoValue: document.getElementById("tempo-value"),
+        toggleButton: document.getElementById("toggle-button"),
+        beatCounter: document.getElementById("beat-counter"),
+        toggleOptions: document.getElementById("toggle-options"),
+        closeOptions: document.getElementById("close-options"),
+        options: document.getElementById("options"),
+        volume: document.getElementById("volume"),
+        waveform: document.getElementById("waveform"),
+        tapButton: document.getElementById("tap-button"),
+        beatFrame: document.getElementById("beat-frame"),
+        beats: document.getElementsByClassName("beat")
+    };
+    elements.toggleButton.addEventListener('click', togglePlay);
+    elements.toggleOptions.addEventListener('click', function () {
+        elements.options.classList.toggle('hidden');
+    });
+    elements.beatType.addEventListener('input', update);
+    // tempo: update display value while dragged and update beat when release
+    elements.tempo.addEventListener('input', updateTempoValue);
+    elements.tempo.addEventListener('change', update);
+    elements.closeOptions.addEventListener('click', () => {
+        elements.options.classList.toggle('hidden');
+    });
+    elements.tapButton.addEventListener('click', updateTapTempo);
+    elements.noteType.addEventListener('click', updateNoteType);
+}
+
 /**
  * How often we should beep
  */
@@ -14,24 +47,6 @@ const frequencies = {
     high: 1760.0
 };
 
-const elements = {
-    noteType: document.getElementById("note-type"),
-    beatType: document.getElementById("beat-type"),
-    tempo: document.getElementById("tempo"),
-    tempoValue: document.getElementById("tempo-value"),
-    toggleButton: document.getElementById("toggle-button"),
-    beatCounter: document.getElementById("beat-counter"),
-    toggleOptions: document.getElementById("toggle-options"),
-    closeOptions: document.getElementById("close-options"),
-    options: document.getElementById("options"),
-    volume: document.getElementById("volume"),
-    waveform: document.getElementById("waveform"),
-    tapButton: document.getElementById("tap-button"),
-
-    beatFrame: document.getElementById("beat-frame"),
-
-    beats: document.getElementsByClassName("beat")
-};
 
 /**
  * timesThrough: The amount of beeps made. This is counted so
@@ -42,26 +57,6 @@ const settings = {
     timesThrough: -1,
     playSound: false
 };
-
-elements.toggleButton.addEventListener('click', togglePlay);
-
-elements.toggleOptions.addEventListener('click', function () {
-    elements.options.classList.toggle('hidden');
-});
-
-elements.beatType.addEventListener('input', update);
-
-// tempo: update display value while dragged and update beat when release
-elements.tempo.addEventListener('input', updateTempoValue);
-elements.tempo.addEventListener('change', update);
-
-elements.closeOptions.addEventListener('click', () => {
-    elements.options.classList.toggle('hidden');
-});
-
-elements.tapButton.addEventListener('click', updateTapTempo);
-
-elements.noteType.addEventListener('click', updateNoteType);
 
 function updateTempoValue() {
     elements.tempoValue.innerText = `at ${elements.tempo.value} bpm`;
@@ -94,15 +89,25 @@ function createDiv() {
     let tempDiv = document.createElement('div');
     tempDiv.className = "beat";
 
-    tempDiv.insertAdjacentElement("beforeend", createDivChild());
-    tempDiv.insertAdjacentElement("beforeend", createDivChild());
-    tempDiv.insertAdjacentElement("beforeend", createDivChild());
+    tempDiv.insertAdjacentElement("beforeend", CreateBeatTypeTop());
+    tempDiv.insertAdjacentElement("beforeend", CreateBeatTypeMiddle());
+    tempDiv.insertAdjacentElement("beforeend", CreateBeatTypeBottom());
     return tempDiv;
 }
 
-function createDivChild() {
+function CreateBeatTypeTop() {
     let tempDiv = document.createElement('div');
-    tempDiv.className = "beat-type";
+    tempDiv.className = "beat-type-top";
+    return tempDiv;
+}
+function CreateBeatTypeMiddle() {
+    let tempDiv = document.createElement('div');
+    tempDiv.className = "beat-type-middle";
+    return tempDiv;
+}
+function CreateBeatTypeBottom() {
+    let tempDiv = document.createElement('div');
+    tempDiv.className = "beat-type-bottom";
     return tempDiv;
 }
 
