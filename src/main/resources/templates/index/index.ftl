@@ -9,8 +9,9 @@
 <body>
     <div>
         <a href="/metronome/">metronome</a>
-        <h3>${test}</h3>
+        <h3 id="test" onclick="clickAddOne()">${test}</h3>
         <h3 id="clock"></h3>
+        <h3 id="count"></h3>
     </div>
 
     <div class="beats" id="beat-frame">

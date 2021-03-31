@@ -1,8 +1,11 @@
 let timeout;
+let count;
 window.onload = function () {
     timeout = setTimeout(function () {
         console.log("onload");
     }, 3000);
+    count = 1;
+    document.getElementById("count").innerHTML = count;
     let clock = document.getElementById("clock");
     clock.innerText = new Date().toISOString();
 }
@@ -48,3 +51,9 @@ window.addEventListener("wheel", function (wheelEvent) {
     console.log(wheelEvent.deltaY)
     // console.log(wheelEvent.wheelDelta)
 })
+
+//模拟鼠标点击
+function clickAddOne() {
+    ++count
+    document.getElementById("count").innerHTML = count;
+}
